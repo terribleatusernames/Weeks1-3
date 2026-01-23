@@ -18,7 +18,7 @@ public class Rotator : MonoBehaviour
     void Update()
     {
 
-        if (transform.eulerAngles.z >= zMax || transform.eulerAngles.z <= zMin)
+        if( transform.eulerAngles.z >= zMax || transform.eulerAngles.z <= zMin)
         {
             rotationSpeed = -rotationSpeed;
             Debug.Log(transform.eulerAngles);
