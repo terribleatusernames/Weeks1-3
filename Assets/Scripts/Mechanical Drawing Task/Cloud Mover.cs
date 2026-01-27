@@ -26,7 +26,7 @@ public class CloudMover : MonoBehaviour
 
         // Check if the cloud has moved off the right side of the screen
         cloudPositionWorld = gameCamera.WorldToScreenPoint(transform.position);
-        xMax = Screen.width + 50;
+        xMax = Screen.width + 100;
 
         if (xMax < cloudPositionWorld.x)
         {
