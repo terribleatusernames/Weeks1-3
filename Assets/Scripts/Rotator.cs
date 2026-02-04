@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Rotator : MonoBehaviour
 {
@@ -18,26 +20,16 @@ public class Rotator : MonoBehaviour
     void Update()
     {
 
-        if( transform.eulerAngles.z >= zMax || transform.eulerAngles.z <= zMin)
-        {
-            rotationSpeed = -rotationSpeed;
-            Debug.Log(transform.eulerAngles);
-        }
-
         //If we wanted to move the object, we would use transform.position
-        Vector3 currentRotation = transform.eulerAngles;
-        currentRotation.z += rotationSpeed * Time.deltaTime;
-
-        transform.eulerAngles = currentRotation;
-
-        Vector3 currentMousePosition = Mouse.current.position.ReadValue();
-        Vector3 worldMousePosition = gameCamera.ScreenToWorldPoint(currentMousePosition);
+        Vector3 worldMousePosition = gameCamera.ScreenToWorldPoint(Input.mousePosition);
         worldMousePosition.z = 0f;
+        transform.up = worldMousePosition - transform.position;
 
-        
-        Vector3 directionToFace = worldMousePosition - transform.position;
-        transform.up = directionToFace;
+        //transform.eulerAngles += transform.up;
 
-        transform.position += transform.up * 1f * Time.deltaTime;
+        //Vector3 currentRotation = transform.eulerAngles;
+        //currentRotation += transform.up;
+        //transform.eulerAngles = currentRotation;
+
     }
 }
