@@ -12,6 +12,7 @@ public class Shooter : MonoBehaviour
     public float destroyTimer = 5f;
     public float pacerSpeed = Random.Range(1f, 5f);
     public Color pacerColour;
+    public float gravity = 10f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,15 +25,14 @@ public class Shooter : MonoBehaviour
       
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject spawnedObject = Instantiate(objectToSpawn, new Vector3(Random.Range(-8f, 8f), Random.Range(-4f, 4f), 0f), Quaternion.identity);
+            GameObject spawnedObject = Instantiate(objectToSpawn, transform.position, transform.position, Quaternion.identity);
             spawnInterval = 0f;
 
-            Pacer spawnedPacer = spawnedObject.GetComponent<Pacer>();
-            spawnedPacer.speed = pacerSpeed;
+            Bullet spawnedBullet = spawnedObject.GetComponent<Bullet>();
+            spawnedBullet.speed = bulletSpeed - gravity;
 
             SpriteRenderer spawnedRenderer = spawnedObject.GetComponent<SpriteRenderer>();
-            spawnedRenderer.color = pacerColour;
-
+           
             Destroy(spawnedObject, destroyTimer);
         }
 
